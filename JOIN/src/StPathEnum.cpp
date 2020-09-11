@@ -127,10 +127,7 @@ uint StaticGraphStPathCalculation::bc_dfs(const NODE_TYPE& u,
 		return 0;
 	} else if (cur_path.size() - 1 < k) {
 		auto nei = g.get_out_nbrs(u);
-		unordered_set<uint> nbr_set;
-		nbr_set.insert(nei.begin(), nei.end());
-		//cout << "Node " << u << "'s nbr size: " << nei.size() << endl;
-		for (uint nbr : nbr_set) {
+		for (uint nbr : nei) {
 			bool found = visited.find(nbr) != visited.end();
 			// initialize the bar[out_nbr]
 			if (bar.find(nbr) == bar.end()) {
