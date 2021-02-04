@@ -42,17 +42,18 @@ void print_data_for_debug(MyVec& barrier, MyVec& sd_s_u, MyVec& sd_u_t,
 
 // split string s by char c
 void split(const string& s, vector<string>& ans, char c) {
-	int len = s.length();
-	int last = 0;
-	int fst = s.find(c);
-	while (fst != -1) {
-		if (fst != last) {
-			ans.push_back(s.substr(last, fst));
-		}
-		last = fst + 1;
-		fst = s.find(c, last);
+	string::size_type pos1, pos2;
+	pos2 = s.find(c);
+	pos1 = 0;
+	while (std::string::npos != pos2)
+	{
+		ans.push_back(s.substr(pos1, pos2 - pos1));
+
+		pos1 = pos2 + 1;
+		pos2 = s.find(c, pos1);
 	}
-	ans.push_back(s.substr(last, len));
+	if (pos1 != s.length())
+		ans.push_back(s.substr(pos1));
 }
 
 void put_graph(vector<vector<uint>>& g, uint* v_idx, uint* e_l) {
